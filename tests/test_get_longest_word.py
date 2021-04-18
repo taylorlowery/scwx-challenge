@@ -23,6 +23,7 @@ def test_get_longest_word(words, expected):
     longest = get_longest_word(words)
     assert longest == expected
 
+# attempting to get longest word from empty list raises IndexError
 @pytest.mark.get_longest_word
 def test_get_longest_word_empty_list():
     LOG.info("test_get_longest_word_empty_list()")
@@ -31,6 +32,7 @@ def test_get_longest_word_empty_list():
     error_msg = ie.value.args[0]
     assert error_msg == "No words were entered"
 
+# attempting to get longest word on wrong type raises TypeError
 @pytest.mark.get_longest_word
 @pytest.mark.parametrize("words, wrong_type_element", [(["a", 12, "abc"], 12), 
                                                         ([13, "a", "abc"], 13), 
