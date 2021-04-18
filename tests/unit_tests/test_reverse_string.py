@@ -90,5 +90,3 @@ def test_reverse_string_other_data_types_raise_value_error(input):
     LOG.debug(exception_actual)
     exception_expected = f"reverse_string() expects a string but got a { type(input) }"
     assert str(exception_actual) == exception_expected
-
-

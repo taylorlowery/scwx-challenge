@@ -51,4 +51,3 @@ def test_read_file_restricted_file(mock_file_directory):
     file = f"{ mock_file_directory }/restricted.txt"
     with pytest.raises(PermissionError) as e:
         read_file(file)
-
