@@ -2,11 +2,13 @@
 import os
 from config import LOG
 
+
 # read contents at filepath and return its contents split on whitespace
 def read_file(filepath):
     with open(file=filepath, mode="r", encoding="utf-8") as file:
-            contents = file.read().split()
-            return contents
+        contents = file.read().split()
+        return contents
+
 
 # Take a list of strings, sort by length, and return the longest
 def get_longest_word(words):
@@ -18,12 +20,14 @@ def get_longest_word(words):
     longest_word = sorted(words, key=len)[-1]
     return longest_word
 
+
 # Take a string as input and return it reversed (transposed)
 def reverse_string(input):
     if not isinstance(input, str):
         raise TypeError(f"reverse_string() expects a string but got a { type(input) }")
     reversed_input = input[::-1]
     return reversed_input
+
 
 # look at directory and return .txt files
 def get_txt_files_in_directory(directory):

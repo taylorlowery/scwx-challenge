@@ -2,6 +2,7 @@ import pytest
 from lib.utils import reverse_string
 from config import LOG
 
+
 # reverse a string
 @pytest.mark.reverse_string
 def test_reverse_string():
@@ -10,11 +11,16 @@ def test_reverse_string():
     actual = reverse_string("word")
     assert expected == actual
 
+
 # reverse a longer string
 @pytest.mark.reverse_string
 def test_reverse_string_long():
     LOG.info("test_reverse_string_long()")
-    input = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    input = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et " \
+            "dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip " \
+            "ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu " \
+            "fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia " \
+            "deserunt mollit anim id est laborum. "
     expected = input[::-1]
     actual = reverse_string(input)
     assert expected == actual
@@ -27,6 +33,7 @@ def test_reverse_string_empty_string():
     actual = reverse_string("")
     assert expected == actual
 
+
 # a string of escaped characters reverses correctly
 @pytest.mark.reverse_string
 def test_reverse_string_escaped_characters():
@@ -34,6 +41,7 @@ def test_reverse_string_escaped_characters():
     expected = "\f\b\t\r\n\"\\\'"
     actual = reverse_string("\'\\\"\n\r\t\b\f")
     assert expected == actual
+
 
 # a string with hex values reverses correctly
 @pytest.mark.reverse_string
@@ -43,6 +51,7 @@ def test_reverse_string_escaped_hex_values():
     actual = reverse_string("\x34\x33\x32\x31")
     assert expected == actual
 
+
 # ansi color code reverses correctly
 @pytest.mark.reverse_string
 def test_reverse_string_escaped_ansi_color_code():
@@ -50,6 +59,7 @@ def test_reverse_string_escaped_ansi_color_code():
     expected = "\033[1,37m"
     actual = reverse_string("m73,1[\033")
     assert expected == actual
+
 
 # unicode strings from other languages reverse correctly
 @pytest.mark.reverse_string
@@ -61,6 +71,7 @@ def test_reverse_string_other_languages(input):
     LOG.debug(f"input: { input }, reversed: {actual}")
     assert expected == actual
 
+
 # a string of emojis reverses correctly
 @pytest.mark.reverse_string
 def test_reverse_string_emojis():
@@ -70,6 +81,7 @@ def test_reverse_string_emojis():
     actual = reverse_string(input)
     assert expected == actual
 
+
 # a string with emojis reverses correctly
 @pytest.mark.reverse_string
 def test_reverse_string_text_message():
@@ -78,6 +90,7 @@ def test_reverse_string_text_message():
     expected = "🤣mtqlfor"
     actual = reverse_string(input)
     assert expected == actual
+
 
 # attempting reverse_string() on another data type raises a TypeError
 @pytest.mark.reverse_string
