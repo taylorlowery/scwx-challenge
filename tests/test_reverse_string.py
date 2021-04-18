@@ -1,5 +1,5 @@
 import pytest
-from lib.largest_word import reverse_string
+from lib.utils import reverse_string
 from config import LOG
 
 @pytest.mark.reverse_string
