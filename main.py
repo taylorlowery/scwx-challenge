@@ -1,4 +1,15 @@
+import sys
 from transposer import Transposer
 
-print(Transposer().transpose("./test_files/positive/abcde.txt"))
-print(Transposer().transpose("./test_files/positive"))
+
+# given a path to a file or directory, yield the longest word of each file
+def transpose(path):
+    return Transposer().transpose(path)
+
+
+if __name__ == "__main__":
+    path = "test_files/abcde.txt"
+    print(sys.argv)
+    if len(sys.argv) >= 2:
+        path = sys.argv[1]
+    print(transpose(path))

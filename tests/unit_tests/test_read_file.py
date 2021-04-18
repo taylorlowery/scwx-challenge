@@ -2,6 +2,7 @@ import pytest
 from lib.utils import read_file, get_longest_word
 from config import LOG
 
+
 # read file separated by newlines
 def test_read_file(tmpdir):
     LOG.info("test_read_file()")
@@ -15,6 +16,7 @@ def test_read_file(tmpdir):
     LOG.debug(actual)
     assert actual == expected
 
+
 # read file separated by spaces
 def test_read_file_spaces(mock_file_directory):
     LOG.info("test_read_file_from_mock_dir()")
@@ -23,6 +25,7 @@ def test_read_file_spaces(mock_file_directory):
     test_file = f"{ mock_file_directory }/abcde.txt"
     actual = read_file(test_file)
     assert actual == expected
+
 
 # read a file with mixed whitespace
 def test_read_file_mixed_whitespace(mock_file_directory):
@@ -33,6 +36,7 @@ def test_read_file_mixed_whitespace(mock_file_directory):
     actual = read_file(test_file)
     assert actual == expected
 
+
 # read from file that doesn't exist
 @pytest.mark.read_file
 def test_read_file_bad_filepath(mock_file_directory):
@@ -41,6 +45,7 @@ def test_read_file_bad_filepath(mock_file_directory):
     with pytest.raises(FileNotFoundError) as e:
         read_file(file)
     LOG.debug(e)
+
 
 # attempting to read a restricted file should raise a PermissionError
 # TODO: simulate permission restriction in mock_file_directory

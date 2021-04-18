@@ -1,6 +1,7 @@
+from logging import ERROR
 import os
 from lib.utils import read_file, get_longest_word, reverse_string, get_txt_files_in_directory
-from config import LOG
+
 
 '''
 encapsulates methods for scwx challenge to find largest word in file, transpose it, and display both
@@ -8,16 +9,18 @@ possible improvements:
 configuration options for cleaning text (ex: remove end-of-line punctuation) and splitting text
 ability to inject/change configuration
 '''
+
+
 class Transposer():
-    
+
     def __init__(self):
         pass
 
-    # Read the contents of a file, find the longest word, reverse(transpose) the word, and return the longest and transposed word
+    # Read the contents of a file, find the longest word, reverse(transpose) the word
+    # return the longest and transposed word
     def get_longest_and_transposed_word_from_file(self, filepath):
 
         file_contents = read_file(filepath)
-        LOG.debug(f"{filepath}: { file_contents }")
         if len(file_contents) == 0:
             raise Exception(f"{filepath} is empty")
         longest = get_longest_word(file_contents)
@@ -28,23 +31,29 @@ class Transposer():
     def transpose(self, path):
         transposition = ""
         filepaths = []
-        if os.path.isdir(path):
-            files = get_txt_files_in_directory(path)
-            if len(files) == 0:
-                transposition += "This directory contains no files"
-            for file in files:
-                filepaths.append(f"{path}/{file}")
-        elif os.path.isfile(path):
-            filepaths.append(path)
-        else:
-            raise Exception("Invalid path")
+        try:
+            if os.path.isdir(path):
+                files = get_txt_files_in_directory(path)
+                if len(files) == 0:
+                    return "This directory contains no .txt files"
+                for file in files:
+                    filepaths.append(f"{path}/{file}")
+            elif os.path.isfile(path):
+                filepaths.append(path)
+            else:
+                return "Invalid path"
+        except OSError as oe:
+            transposition += str(oe)
+        except PermissionError as pe:
+            transposition += str(pe)
+        except Exception as e:
+            transposition += str(e)
         for file in filepaths:
             try:
                 transposition += f"Transposition for { file }:\n"
-                # try get longest transposed, if exception, print that
-                (longest, reversed_word) = self.get_longest_and_transposed_word_from_file(file)
+                (longest, reversed_word) = Transposer().get_longest_and_transposed_word_from_file(file)
                 transposition += f"{longest}\n{reversed_word}\n"
-                transposition +="============================\n"
             except Exception as e:
-                print(e)
+                transposition += f"{str(e)}\n"
+            transposition += "============================\n"
         return transposition

@@ -2,6 +2,7 @@ import pytest
 from lib.utils import get_longest_word
 from config import LOG
 
+
 # Get longest word from a string of characters
 @pytest.mark.get_longest_word
 @pytest.mark.parametrize("words, expected", [(["a", "ab", "abc"], "abc"), 
@@ -23,6 +24,7 @@ def test_get_longest_word(words, expected):
     longest = get_longest_word(words)
     assert longest == expected
 
+
 # attempting to get longest word from empty list raises IndexError
 @pytest.mark.get_longest_word
 def test_get_longest_word_empty_list():
@@ -31,6 +33,7 @@ def test_get_longest_word_empty_list():
         longest = get_longest_word([])
     error_msg = ie.value.args[0]
     assert error_msg == "No words were entered"
+
 
 # attempting to get longest word on wrong type raises TypeError
 @pytest.mark.get_longest_word
