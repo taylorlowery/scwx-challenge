@@ -14,11 +14,11 @@ def mock_file_directory(tmpdir_factory):
 
     # challenge example in random order
     abcde_random_txt = mock_file_dir.join("abcde_random.txt")
-    abcde_random_txt.write("abc\nabcde\nab\na\nabcd")
+    abcde_random_txt.write("abc\nabcde\nab\na\nabcd  ")
 
     #separated by other whitespace characters
     abcde_whitespace_txt = mock_file_dir.join("abcde_whitespace.txt")
-    abcde_whitespace_txt.write("a ab\tabc\fabcd\rabcde")
+    abcde_whitespace_txt.write("a ab    \tabc\f abcd  \rabcde")
     
     #restricted permission file (unsuccessful)
     restricted_txt = mock_file_dir.join("restricted.txt")
