@@ -16,28 +16,35 @@ class Transposer():
     # Read the contents of a file, find the longest word, reverse(transpose) the word, and return the longest and transposed word
     def get_longest_and_transposed_word_from_file(self, filepath):
 
-        try:
-            file_contents = read_file(filepath)
-            LOG.debug(f"{filepath}: { file_contents }")
-            if len(file_contents) == 0:
-                # TODO: Handle empty file
-                pass
-            longest = get_longest_word(file_contents)
-            reversed_word = reverse_string(longest)
-            return (longest, reversed_word)
-        except Exception as e:
-            LOG.debug(e)
+        file_contents = read_file(filepath)
+        LOG.debug(f"{filepath}: { file_contents }")
+        if len(file_contents) == 0:
+            raise Exception(f"{filepath} is empty")
+        longest = get_longest_word(file_contents)
+        reversed_word = reverse_string(longest)
+        return (longest, reversed_word)
 
     # given a path to a file or directory, yield the longest word of each file
     def transpose(self, path):
+        transposition = ""
+        filepaths = []
         if os.path.isdir(path):
             files = get_txt_files_in_directory(path)
             if len(files) == 0:
-                raise Exception("no files!")
+                transposition += "This directory contains no files"
             for file in files:
-                thing = self.get_longest_and_transposed_word_from_file(f"{path}/{file}")
-                yield thing
+                filepaths.append(f"{path}/{file}")
         elif os.path.isfile(path):
-            yield self.get_longest_and_transposed_word_from_file(path)
+            filepaths.append(path)
         else:
             raise Exception("Invalid path")
+        for file in filepaths:
+            try:
+                transposition += f"Transposition for { file }:\n"
+                # try get longest transposed, if exception, print that
+                (longest, reversed_word) = self.get_longest_and_transposed_word_from_file(file)
+                transposition += f"{longest}\n{reversed_word}\n"
+                transposition +="============================\n"
+            except Exception as e:
+                print(e)
+        return transposition
