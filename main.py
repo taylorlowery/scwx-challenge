@@ -9,4 +9,13 @@ def transpose(path):
         print(e)
 
 
-transpose("./files/abcde.txt")
+transpose("./test_files/abcde.txt")
+transpose("./test_files/ugly.txt")
+transpose("./test_files/doubles.txt")
+transpose("./test_files/integers.txt")
+transpose("./test_files/languages.txt")
+transpose("./test_files/length_tie.txt")
+transpose("./test_files/symbols.txt")
+transpose("./test_files/emojis.txt")
+transpose("./test_files/newlines.txt")
+transpose("./test_files/empty.txt")
