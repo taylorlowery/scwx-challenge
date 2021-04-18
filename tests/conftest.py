@@ -1,6 +1,7 @@
 import pytest
 import os
 from config import LOG
+from transposer import Transposer
 
 # create temporary file directory with sample text files for unit testing
 @pytest.fixture(scope="session")
@@ -28,3 +29,8 @@ def mock_file_directory(tmpdir_factory):
     LOG.debug(f"Created mock file directory at { mock_file_dir }")
     return mock_file_dir
 
+# create transposer to be used in tests
+@pytest.fixture(scope="session")
+def transposer_fixture():
+    t = Transposer()
+    return t
