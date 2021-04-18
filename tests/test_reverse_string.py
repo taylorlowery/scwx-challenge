@@ -54,6 +54,22 @@ def test_reverse_string_other_languages(input):
     assert expected == actual
 
 @pytest.mark.reverse_string
+def test_reverse_string_emojis():
+    LOG.info(f"test_reverse_string_emojis(🙃)")
+    input = "🤔😒💯🤘🐙"
+    expected = "🐙🤘💯😒🤔"
+    actual = reverse_string(input)
+    assert expected == actual
+
+@pytest.mark.reverse_string
+def test_reverse_string_text_message():
+    LOG.info(f"test_reverse_string_text_message()")
+    input = "roflqtm🤣"
+    expected = "🤣mtqlfor"
+    actual = reverse_string(input)
+    assert expected == actual
+
+@pytest.mark.reverse_string
 @pytest.mark.parametrize("input", [None, 1234, 1.0, 0, True, False, ["a", "b", "c"], ("a", "b", "c"), bytearray(5), b"Howdy!"])
 def test_reverse_string_other_data_types_raise_value_error(input):
     LOG.info(f"test_reverse_string_other_data_types_raise_value_error({ input })")
