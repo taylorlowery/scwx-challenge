@@ -1,3 +1,4 @@
+from logging import ERROR
 import os
 from lib.utils import read_file, get_longest_word, reverse_string, get_txt_files_in_directory
 
@@ -30,16 +31,23 @@ class Transposer():
     def transpose(self, path):
         transposition = ""
         filepaths = []
-        if os.path.isdir(path):
-            files = get_txt_files_in_directory(path)
-            if len(files) == 0:
-                return "This directory contains no files"
-            for file in files:
-                filepaths.append(f"{path}/{file}")
-        elif os.path.isfile(path):
-            filepaths.append(path)
-        else:
-            return "Invalid path"
+        try:
+            if os.path.isdir(path):
+                files = get_txt_files_in_directory(path)
+                if len(files) == 0:
+                    return "This directory contains no .txt files"
+                for file in files:
+                    filepaths.append(f"{path}/{file}")
+            elif os.path.isfile(path):
+                filepaths.append(path)
+            else:
+                return "Invalid path"
+        except OSError as oe:
+            transposition += str(oe)
+        except PermissionError as pe:
+            transposition += str(pe)
+        except Exception as e:
+            transposition += str(e)
         for file in filepaths:
             try:
                 transposition += f"Transposition for { file }:\n"
