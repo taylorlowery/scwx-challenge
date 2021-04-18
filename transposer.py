@@ -1,4 +1,5 @@
-from lib.utils import read_file, get_longest_word, reverse_string
+import os
+from lib.utils import read_file, get_longest_word, reverse_string, get_txt_files_in_directory
 
 
 '''
@@ -24,3 +25,27 @@ class Transposer():
         longest = get_longest_word(file_contents)
         reversed_word = reverse_string(longest)
         return (longest, reversed_word)
+
+    # given a path to a file or directory, yield the longest word of each file
+    def transpose(self, path):
+        transposition = ""
+        filepaths = []
+        if os.path.isdir(path):
+            files = get_txt_files_in_directory(path)
+            if len(files) == 0:
+                return "This directory contains no files"
+            for file in files:
+                filepaths.append(f"{path}/{file}")
+        elif os.path.isfile(path):
+            filepaths.append(path)
+        else:
+            return "Invalid path"
+        for file in filepaths:
+            try:
+                transposition += f"Transposition for { file }:\n"
+                (longest, reversed_word) = Transposer().get_longest_and_transposed_word_from_file(file)
+                transposition += f"{longest}\n{reversed_word}\n"
+            except Exception as e:
+                transposition += f"{str(e)}\n"
+            transposition += "============================\n"
+        return transposition
