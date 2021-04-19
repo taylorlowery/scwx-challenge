@@ -62,7 +62,7 @@ python -m venv venv
 ```
 pip install -r requirements.txt
 ```
-5. Run main.py with default implementation
+6. Try out the Transposer with default implementation:
 ```
 python main.py
 ```
@@ -72,8 +72,18 @@ Transposition for abcde.txt:
 abcde
 edcba
 ```
-6. Run main.py on sample.txt
-7. Run main.py on absolute path to own file
+If you look in the sample_txt_files directory, you'll see a number of .txt files that you can try the Transposer out on:
+```
+python main.py ./sample_txt_files/emojis.txt
+```
+or you can run the Transposer on the whole directory:
+```
+python main.py ./sample_txt_files
+```
+Lastly, you can run the transposer on an absolute path to your own file or directory. For example:
+```
+python main.py "C:\Users\{ you }\Desktop\absolutepath.txt"
+```
 8. Run tests
 9. In your terminal, deactivate the Virtual Environment:
 ```
