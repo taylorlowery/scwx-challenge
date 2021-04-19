@@ -95,9 +95,11 @@ python main.py "C:\Users\{ you }\Desktop\absolutepath.txt"
 ```
 ### 8. Run the tests!
 The tests directory contains folders for unit tests and integration tests. The unit tests cover the methods in lib.utils.py, and instead of accessing the file system, they use a mock/temporary directory defined as a fixture in conftest.py. The integration tests cover the Transposer, and run tests against the .txt documents in the sample_txt_files directory. Since the Transposer currently holds no state, all the tests use a transposer that is also defined as a fixture in conftest.py. 
-In the future, test coverage could be improved by writing unit tests for the transposer that use the mock file directory rather than sample_txt_files, as well as expanding the variety of files in the mock file directory.
-If configuration or other functionality were added to the Transposer in the future, using a fixture would probably not be a suitable approach. 
-To run all the tests, from the root of the project folder, you just need to "pytest" the path to the directory or file containing the tests you wish to run: 
+In the future, test coverage could be improved by writing unit tests for the transposer that use the mock file directory rather than sample_txt_files, as well as expanding the variety of files in the mock file directory. If configuration or other functionality were added to the Transposer in the future, using a fixture would probably not be a suitable approach. 
+To run all the tests, from the root of the project folder, you just need to "pytest" the path to the directory or file containing the tests you wish to run:
+
+_Note: one failing test has intentionally been left in, marked as an expected failure. During my tests, I was unable to successfully simulate a file permission error, but I left in the failed test for future discussion_
+
 ```
 # all tests
 pytest ./tests
