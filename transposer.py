@@ -52,7 +52,7 @@ class Transposer():
             transposition += str(e)
         for file in filepaths:
             try:
-                transposition += f"Transposition for { os.path.basename(path) }:\n"
+                transposition += f"Transposition for { os.path.basename(file) }:\n"
                 (longest, reversed_word) = Transposer().get_longest_and_transposed_word_from_file(file)
                 transposition += f"{longest}\n{reversed_word}\n\n"
             except Exception as e:
