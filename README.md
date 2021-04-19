@@ -24,7 +24,7 @@ edcba
 ```
 
 ## Assumptions
-For the purposes of this challenge, I assumed that all text input would be submitted as .txt files, and that the strings in the text input would be separated by standard english whitespace (ex: spaces, tabs, and newlines). I did not attempt to account punctuation in this implementation, so punctuation characters are counted as part of a word(ex: "Hello!" is counted as a 6-letter word).
+For the purposes of this challenge, I assumed that all text input would be submitted as .txt files, and that the strings in the text input would be separated by standard english whitespace (ex: spaces, tabs, and newlines). I did not attempt to account for punctuation in this implementation, so punctuation characters are counted as part of a word(ex: "Hello!" is counted as a 6-letter word). Lastly, if there multiple words that tie for the longest length, the last word is printed.
 
 ## Description of Solution
 This solution centers around a Transposer class (transposer.py) that makes use of the methods in lib.utils.py to get all the .txt text files in a given directory, open and read each .txt file, find the longest string in each file, and transpose(reverse) that longest string. Finally, it prints the longest string and its transposition. Future improvements to this class could include methods for cleaning txt files before searching for the longest word (for example, to remove punctuation) or a different schema for splitting text than whitespace (for example, to accommodate Lao and Vietnamese documents).
@@ -34,8 +34,10 @@ The solution works by passing a path to a .txt file or a directory. If main.py i
 ## Prerequisites
 
 ### [Python 3.8 or higher](https://www.python.org/downloads/)
-### [Pip](https://pip.pypa.io/en/stable/installing/) - _Pip should already be installed with Python 3.4 or higher, but here's the installation instructions, just in case_
-### [Venv](https://docs.python.org/3/library/venv.html#module-venv) - _should also be installed with Python_
+### [Pip](https://pip.pypa.io/en/stable/installing/)
+_Pip should already be installed with Python 3.4 or higher, but here's the installation instructions, just in case_
+### [Venv](https://docs.python.org/3/library/venv.html#module-venv)
+_should also be installed with Python_
 ### [VS Code](https://code.visualstudio.com/)
 
 ## Instructions
@@ -53,8 +55,23 @@ cd scwx-challenge
 python -m pip install -U pip
 ```
 4. Create & Activate Virtual Environment
+```
+python -m venv venv
+```
 5. Install requirements
-5. Run main.py on default
+```
+pip install -r requirements.txt
+```
+5. Run main.py with default implementation
+```
+python main.py
+```
+This runs transpose() on a sample file that fulfills the challenge example, and should print: 
+```
+Transposition for abcde.txt:
+abcde
+edcba
+```
 6. Run main.py on sample.txt
 7. Run main.py on absolute path to own file
 8. Run tests
