@@ -75,7 +75,7 @@ pip install -r requirements.txt
 ```
 python main.py
 ```
-This runs transpose() on a sample file that fulfills the challenge example, and should print: 
+This runs the Transposer on a sample file that happens to fulfill the challenge example, and should print: 
 ```
 Transposition for abcde.txt:
 abcde
@@ -94,16 +94,20 @@ Lastly, you can run the transposer on an absolute path to your own file or direc
 python main.py "C:\Users\{ you }\Desktop\absolutepath.txt"
 ```
 ### 8. Run the tests!
-The tests directory contains folders for unit tests and integration tests. The unit tests cover the methods in lib.utils.py, and instead of accessing the file system, they a mock/temporary directory definted as a fixture in conftest.py. The integration tests cover the Transposer, and run tests against the .txt documents in the sample_txt_files directory. Since the Transposer currently holds no state, all the tests use a transposer that is also defined as a fixture in conftest.py. 
+The tests directory contains folders for unit tests and integration tests. The unit tests cover the methods in lib.utils.py, and instead of accessing the file system, they use a mock/temporary directory defined as a fixture in conftest.py. The integration tests cover the Transposer, and run tests against the .txt documents in the sample_txt_files directory. Since the Transposer currently holds no state, all the tests use a transposer that is also defined as a fixture in conftest.py. 
 In the future, test coverage could be improved by writing unit tests for the transposer that use the mock file directory rather than sample_txt_files, as well as expanding the variety of files in the mock file directory.
-To run all the tests, from the root of the project folder, you just need to pytest the path to the directory or file containing the tests you wish to run: 
+If configuration or other functionality were added to the Transposer in the future, using a fixture would probably not be a suitable approach. 
+To run all the tests, from the root of the project folder, you just need to "pytest" the path to the directory or file containing the tests you wish to run: 
 ```
 # all tests
 pytest ./tests
+
 # just the integration tests:
 pytest ./tests/integration_tests
+
 # just the unit tests: 
 pytest ./tests/unit_tests
+
 # a single test document
 pytest ./tests/unit_tests/test_get_longest_word.py
 ```
@@ -111,11 +115,12 @@ All the tests are also marked so that the user can run subsets of the tests. The
 ```
 # run only transposer tests
 pytest -v -m transposer ./tests
+
 # run all but transposer tests
 pytest -v -m "not transposer" ./tests
 ```
 
-### 9. Remember to deactivate the Virtual Environment:
+### 9. Remember to deactivate your Virtual Environment:
 ```
 deactivate
 ```
