@@ -41,28 +41,29 @@ _should also be installed with Python_
 ### [VS Code](https://code.visualstudio.com/)
 
 ## Instructions
-1. Open a terminal and navigate to the directory where you'd like to clone a git repo.
-2. Clone this repository:
+_The following instructions should work on Windows, Mac, and Linux systems. Depending on your system, you may need to elevate to administrator privileges._
+### 1. Open a terminal and navigate to the directory where you'd like to clone a git repo.
+### 2. Clone this repository:
 ```
 git clone https://github.com/taylorlowery/scwx-challenge.git
 ```
-3. Navigate into the project directory:
+### 3. Navigate into the project directory:
 ```
 cd scwx-challenge
 ```
-4. Upgrade pip:
+### 4. Upgrade pip:
 ```
 python -m pip install -U pip
 ```
-4. Create & Activate Virtual Environment
+### 4. Create & Activate Virtual Environment
 ```
 python -m venv venv
 ```
-5. Install requirements
+### 5. Install requirements
 ```
 pip install -r requirements.txt
 ```
-6. Try out the Transposer with default implementation:
+### 6. Try out the Transposer with default implementation:
 ```
 python main.py
 ```
@@ -76,7 +77,7 @@ If you look in the sample_txt_files directory, you'll see a number of .txt files
 ```
 python main.py ./sample_txt_files/emojis.txt
 ```
-or you can run the Transposer on the whole directory:
+or you can run the Transposer on the whole directory, printing out the transposition for each .txt file:
 ```
 python main.py ./sample_txt_files
 ```
@@ -84,9 +85,29 @@ Lastly, you can run the transposer on an absolute path to your own file or direc
 ```
 python main.py "C:\Users\{ you }\Desktop\absolutepath.txt"
 ```
-8. Run tests
+### 8. Run the tests!
+The tests directory contains folders for unit tests and integration tests. The unit tests cover the methods in lib.utils.py, and instead of accessing the file system, they a mock/temporary directory definted as a fixture in conftest.py. The integration tests cover the Transposer, and run tests against the .txt documents in the sample_txt_files directory. Since the Transposer currently holds no state, all the tests use a transposer that is also defined as a fixture in conftest.py. 
+In the future, test coverage could be improved by writing unit tests for the transposer that use the mock file directory rather than sample_txt_files, as well as expanding the variety of files in the mock file directory.
+To run all the tests, from the root of the project folder, you just need to pytest the path to the directory or file containing the tests you wish to run: 
+```
+# all tests
+pytest ./tests
+# just the integration tests:
+pytest ./tests/integration_tests
+# just the unit tests: 
+pytest ./tests/unit_tests
+# a single test document
+pytest ./tests/unit_tests/test_get_longest_word.py
+```
+All the tests are also marked so that the user can run subsets of the tests. The full list of markers can be found under "markers" in pytest.ini. A subset of marked tests can be run or excluded like so:
+```
+# run only transposer tests
+pytest -v -m transposer ./tests
+# run all but transposer tests
+pytest -v -m "not transposer" ./tests
+```
 
-9. In your terminal, deactivate the Virtual Environment:
+### 9. Remember to deactivate the Virtual Environment:
 ```
 deactivate
 ```
