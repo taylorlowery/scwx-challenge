@@ -113,10 +113,10 @@ pytest ./tests/unit_tests/test_get_longest_word.py
 ```
 All the tests are also marked so that the user can run subsets of the tests. The full list of markers can be found under "markers" in pytest.ini. A subset of marked tests can be run or excluded like so:
 ```
-# run only transposer tests
+# run only the transposer tests
 pytest -v -m transposer ./tests
 
-# run all but transposer tests
+# run all except the transposer tests
 pytest -v -m "not transposer" ./tests
 ```
 
