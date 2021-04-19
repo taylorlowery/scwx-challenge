@@ -3,6 +3,12 @@ import os
 from config import LOG
 
 
+# look at directory and return .txt files
+def get_txt_files_in_directory(directory):
+    files = os.listdir(directory)
+    return [txt for txt in files if txt.endswith(".txt")]
+
+
 # read contents at filepath and return its contents split on whitespace
 def read_file(filepath):
     with open(file=filepath, mode="r", encoding="utf-8") as file:
@@ -27,9 +33,3 @@ def reverse_string(input):
         raise TypeError(f"reverse_string() expects a string but got a { type(input) }")
     reversed_input = input[::-1]
     return reversed_input
-
-
-# look at directory and return .txt files
-def get_txt_files_in_directory(directory):
-    files = os.listdir(directory)
-    return [txt for txt in files if txt.endswith(".txt")]
