@@ -19,7 +19,7 @@ def test_get_txt_files_in_directory(mock_file_directory):
 def test_get_txt_files_in_directory_bad_path(mock_file_directory):
     LOG.info("test_get_txt_files_in_directory_bad_path()")
     # make sure the bad file path doesn't exist
-    bad_file_path = f"{ mock_file_directory }/nonexistant_directory"
+    bad_file_path = os.path.join(mock_file_directory, "nonexistant_directory")
     if os.path.exists(bad_file_path):
         os.remove(bad_file_path)
     with pytest.raises(FileNotFoundError) as fe:

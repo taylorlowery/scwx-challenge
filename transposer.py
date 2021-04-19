@@ -37,8 +37,10 @@ class Transposer():
                 if len(files) == 0:
                     return "This directory contains no .txt files"
                 for file in files:
-                    filepaths.append(f"{path}/{file}")
+                    filepaths.append(os.path.join(path, file))
             elif os.path.isfile(path):
+                if not path.endswith(".txt"):
+                    return "The supplied file must be a .txt"
                 filepaths.append(path)
             else:
                 return "Invalid path"
