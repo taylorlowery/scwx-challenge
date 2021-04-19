@@ -48,11 +48,17 @@ git clone https://github.com/taylorlowery/scwx-challenge.git
 ```
 cd scwx-challenge
 ```
-4. Upgrade pip
+4. Upgrade pip:
+```
+python -m pip install -U pip
+```
 4. Create & Activate Virtual Environment
 5. Install requirements
 5. Run main.py on default
 6. Run main.py on sample.txt
 7. Run main.py on absolute path to own file
 8. Run tests
-9. Deactivate Virtual Environment
+9. In your terminal, deactivate the Virtual Environment:
+```
+deactivate
+```
