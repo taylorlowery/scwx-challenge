@@ -1,3 +1,4 @@
+import os
 import pytest
 from lib.utils import read_file, get_longest_word
 from config import LOG
@@ -22,7 +23,7 @@ def test_read_file_spaces(mock_file_directory):
     LOG.info("test_read_file_from_mock_dir()")
     file_contents = "a ab abc abcd abcde"
     expected = file_contents.split()
-    test_file = f"{ mock_file_directory }/abcde.txt"
+    test_file = os.path.join(mock_file_directory, "abcde.txt")
     actual = read_file(test_file)
     assert actual == expected
 
@@ -32,7 +33,7 @@ def test_read_file_mixed_whitespace(mock_file_directory):
     LOG.info("test_read_file_from_mock_dir()")
     file_contents = "a ab abc abcd abcde"
     expected = file_contents.split()
-    test_file = f"{ mock_file_directory }/abcde_whitespace.txt"
+    test_file = os.path.join(mock_file_directory, "abcde_whitespace.txt")
     actual = read_file(test_file)
     assert actual == expected
 
@@ -41,7 +42,7 @@ def test_read_file_mixed_whitespace(mock_file_directory):
 @pytest.mark.read_file
 def test_read_file_bad_filepath(mock_file_directory):
     LOG.info("test_read_file_bad_filepath()")
-    file = f"{ mock_file_directory }/badfilepath.txt"
+    file = os.path.join(mock_file_directory, "badfilepath.txt")
     with pytest.raises(FileNotFoundError) as e:
         read_file(file)
     LOG.debug(e)
@@ -53,6 +54,6 @@ def test_read_file_bad_filepath(mock_file_directory):
 @pytest.mark.read_file
 def test_read_file_restricted_file(mock_file_directory):
     LOG.info("test_read_file_restricted_file()")
-    file = f"{ mock_file_directory }/restricted.txt"
+    file = os.path.join(mock_file_directory, "restricted.txt")
     with pytest.raises(PermissionError) as e:
         read_file(file)

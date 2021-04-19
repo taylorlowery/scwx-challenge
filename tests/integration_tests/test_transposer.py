@@ -1,7 +1,6 @@
-from attr import field
 import pytest
 import os
-from config import LOG
+from config import LOG, ROOT_DIR
 
 
 # running transpose on specific file produces expected results
@@ -18,25 +17,25 @@ from config import LOG
                                 ])
 def test_transpose(transposer_fixture, filename, expected_longest, expected_reverse):
     LOG.info(f"test_transpose_single_file({ filename })")
-    (longest, reversed_word) = transposer_fixture.get_longest_and_transposed_word_from_file(os.path.join("./sample_txt_files",  filename))
+    (longest, reversed_word) = transposer_fixture.get_longest_and_transposed_word_from_file(os.path.join(ROOT_DIR, "sample_txt_files",  filename))
     assert longest == expected_longest
     assert reversed_word == expected_reverse
 
 
-# running transpose on empty file raises error
+# running transpose on empty file raises Exception
 @pytest.mark.transposer
 def test_transpose_empty_file(transposer_fixture):
     LOG.info("test_transpose_empty_file()")
     with pytest.raises(Exception) as e:
-        (longest, transposed) = transposer_fixture.get_longest_and_transposed_word_from_file("./sample_txt_files/empty.txt")
+        (longest, transposed) = transposer_fixture.get_longest_and_transposed_word_from_file(os.path.join(ROOT_DIR, "sample_txt_files", "empty.txt"))
 
 
-# running transpose on whitespace-only file raises error
+# running transpose on whitespace-only file raises Exception
 @pytest.mark.transposer
 def test_transpose_newlines(transposer_fixture):
     LOG.info("test_transpose_newlines()")
     with pytest.raises(Exception) as e:
-        (longest, transposed) = transposer_fixture.get_longest_and_transposed_word_from_file("./sample_txt_files/newlines.txt")
+        (longest, transposed) = transposer_fixture.get_longest_and_transposed_word_from_file(os.path.join(ROOT_DIR, "sample_txt_files", "newlines.txt"))
 
 
 # running transpose on empty directory returns string indicating error
@@ -44,7 +43,7 @@ def test_transpose_newlines(transposer_fixture):
 def test_transpose_empty_dir(transposer_fixture):
     LOG.info("test_transpose_empty_dir()")
     expected = "This directory contains no .txt files"
-    actual = transposer_fixture.transpose("./sample_txt_files/dir_no_txt")
+    actual = transposer_fixture.transpose(os.path.join(ROOT_DIR, "sample_txt_files", "dir_no_txt"))
     assert actual == expected
 
 
@@ -62,7 +61,5 @@ def test_transpose_bad_path(transposer_fixture):
 def test_transpose_non_txt_file(transposer_fixture):
     LOG.info("test_transpose_non_txt_file()")
     expected = "The supplied file must be a .txt"
-    actual = transposer_fixture.transpose("./sample_txt_files/dir_no_txt/nada.py")
-
-
-
+    actual = transposer_fixture.transpose(os.path.join(ROOT_DIR, "sample_txt_files", "dir_no_txt", "nada.py"))
+    assert actual == expected
