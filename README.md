@@ -85,6 +85,7 @@ Lastly, you can run the transposer on an absolute path to your own file or direc
 python main.py "C:\Users\{ you }\Desktop\absolutepath.txt"
 ```
 8. Run tests
+
 9. In your terminal, deactivate the Virtual Environment:
 ```
 deactivate
