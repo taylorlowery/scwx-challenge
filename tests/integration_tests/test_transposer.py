@@ -54,3 +54,11 @@ def test_transpose_bad_path(transposer_fixture):
     expected = "Invalid path"
     actual = transposer_fixture.transpose("")
     assert actual == expected
+
+
+# running transpose on a non-.txt file returns string indicating error
+@pytest.mark.transposer
+def test_transpose_non_txt_file(transposer_fixture):
+    LOG.info("test_transpose_non_txt_file()")
+    expected = "The supplied file must be a .txt"
+    actual = transposer_fixture.transpose("./sample_txt_files/dir_no_txt/nada.py")

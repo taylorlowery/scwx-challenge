@@ -39,6 +39,8 @@ class Transposer():
                 for file in files:
                     filepaths.append(f"{path}/{file}")
             elif os.path.isfile(path):
+                if not path.endswith(".txt"):
+                    return "The supplied file must be a .txt"
                 filepaths.append(path)
             else:
                 return "Invalid path"
