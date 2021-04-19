@@ -8,7 +8,7 @@ def transpose(path):
 
 
 if __name__ == "__main__":
-    path = "test_files/abcde.txt"
+    path = "./sample_txt_files/abcde.txt"
     print(sys.argv)
     if len(sys.argv) >= 2:
         path = sys.argv[1]

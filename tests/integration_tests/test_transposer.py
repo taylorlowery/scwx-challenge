@@ -1,5 +1,6 @@
 from attr import field
 import pytest
+import os
 from config import LOG
 
 
@@ -17,7 +18,7 @@ from config import LOG
                                 ])
 def test_transpose(transposer_fixture, filename, expected_longest, expected_reverse):
     LOG.info(f"test_transpose_single_file({ filename })")
-    (longest, reversed_word) = transposer_fixture.get_longest_and_transposed_word_from_file(f"./sample_txt_files/{ filename }")
+    (longest, reversed_word) = transposer_fixture.get_longest_and_transposed_word_from_file(os.path.join("./sample_txt_files",  filename))
     assert longest == expected_longest
     assert reversed_word == expected_reverse
 
@@ -62,3 +63,6 @@ def test_transpose_non_txt_file(transposer_fixture):
     LOG.info("test_transpose_non_txt_file()")
     expected = "The supplied file must be a .txt"
     actual = transposer_fixture.transpose("./sample_txt_files/dir_no_txt/nada.py")
+
+
+
