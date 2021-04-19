@@ -22,7 +22,7 @@ class Transposer():
 
         file_contents = read_file(filepath)
         if len(file_contents) == 0:
-            raise Exception(f"{filepath} is empty")
+            raise Exception(f"{filepath} is empty\n")
         longest = get_longest_word(file_contents)
         reversed_word = reverse_string(longest)
         return (longest, reversed_word)
@@ -52,10 +52,9 @@ class Transposer():
             transposition += str(e)
         for file in filepaths:
             try:
-                transposition += f"Transposition for { file }:\n"
+                transposition += f"Transposition for { os.path.basename(file) }:\n"
                 (longest, reversed_word) = Transposer().get_longest_and_transposed_word_from_file(file)
-                transposition += f"{longest}\n{reversed_word}\n"
+                transposition += f"{longest}\n{reversed_word}\n\n"
             except Exception as e:
                 transposition += f"{str(e)}\n"
-            transposition += "============================\n"
         return transposition
